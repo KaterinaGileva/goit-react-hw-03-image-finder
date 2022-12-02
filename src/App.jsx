@@ -1,52 +1,119 @@
-import { SeachBarForm } from 'components/Searchbar/SeachBarForm';
 import { Component } from 'react';
+import { Searchbar } from 'components/Searchbar/Searchbar';
+import { ImageGallery } from 'components/ImageGallery/ImageGallery';
+import {fetchImages} from './services/api.jsx';
 
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-import * as API from 'services/api';
 
 export class App extends Component {
   state = {
+    query: '',
+    page: 1,
     images: [],
+    totalImages: 0,
+    imagesOnPage: 0,
     isLoading: false,
-    error: false,
+    showModal: false,
+    error: null,
+    currentImageUrl: null,
+    currentImageDescription: null,
   };
 
-  async componentDidMount() {
-    try {
-      this.setState({ isLoading: true });
-      const images = await API.getMaterials();
-      this.setState({ images, isLoading: false });
-    } catch (error) {
-      this.setState({ error: true, isLoading: false });
-      console.log(error);
+  componentDidUpdate(prevProps, prevState) {
+    const { query, page } = this.state;
+
+    if (prevState.query !== query || prevState.page !== page) {
+      this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
+
+      fetchImages(query, this.state.page)
+        .then(({ hits, totalHits }) => {
+          const imagesArray = hits.map(hit => ({
+            id: hit.id,
+            description: hit.tags,
+            smallImage: hit.webformatURL,
+            largeImage: hit.largeImageURL,
+          }));
+          
+          return this.setState(({ images, imagesOnPage }) => ({
+            images: [...images, ...imagesArray],
+            imagesOnPage: imagesOnPage + imagesArray.length,
+            totalImages: totalHits,
+            isLoading: false,
+          }));
+        })
+        .catch(error => this.setState({ error }))
+         .finally(() =>
+          this.setState(({ isLoading }) => ({ isLoading: false }))
+        );
     }
   }
 
-  addMaterial = async (searchQuery) => {
-    try {
-      const image = await API.addMaterial(searchQuery);
-      this.setState(state => ({
-        images: [...state.images, image],
-      }));
-    } catch (error) {
-      this.setState({ error: true, isLoading: false });
-      console.log(error);
-    }
+  getSearchRequest = query => {
+    this.setState({ query: query, page: 1, images: [] });
   };
 
-  
+  onNextFetch = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
+
+ /* toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };*/
+
+ /* openModal = e => {
+    const currentImageUrl = e.target.dataset.large;
+    const currentImageDescription = e.target.alt;
+
+      this.setState(({ showModal }) => ({
+        showModal: !showModal,
+        currentImageUrl: currentImageUrl,
+        currentImageDescription: currentImageDescription,
+      }));
+  };*/
 
   render() {
-   // const { materials, isLoading, error } = this.state;
+    const {
+      images,
+     // imagesOnPage,
+      //totalImages,
+     // isLoading,
+     // showModal,
+     // currentImageUrl,
+     // currentImageDescription,
+    } = this.state;
+
+    const getSearchRequest = this.getSearchRequest;
+   // const onNextFetch = this.onNextFetch;
+  //  const openModal = this.openModal;
+   // const toggleModal = this.toggleModal;
+
     return (
       <>
+        <Searchbar onSubmit={getSearchRequest} />
+
+        {images && <ImageGallery images={images} /*openModal={openModal}*/ />}
+
         
-        
-        <SeachBarForm onSubmit={this.addMaterial} />
-        
+
+        <ToastContainer />
       </>
     );
   }
 }
+
+/*{isLoading && <Loader />}
+
+        {imagesOnPage >= 12 && imagesOnPage < totalImages && (
+          <Button onNextFetch={onNextFetch} />
+        )}
+
+        {showModal && (
+          <Modal
+            onClose={toggleModal}
+            currentImageUrl={currentImageUrl}
+            currentImageDescription={currentImageDescription}
+          />
+        )}*/

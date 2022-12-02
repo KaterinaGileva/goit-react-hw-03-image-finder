@@ -1,5 +1,8 @@
 //import { Grid } from  'react-loader-spinner'
-//import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
+
+
 
 //<Grid
  // height="80"
@@ -9,7 +12,7 @@
  // radius="12.5"
  // wrapperStyle={{}}
  // wrapperClass=""
-  //visible={true}
+ // visible={true}
 ///>
 
 //import { ImSpinner } from 'react-icons/im';
@@ -26,14 +29,14 @@
 //};
 
 //export  function Loader({ photoName }) {
- // const photo = {
-  // name: photoName,
-  // sprites: {
-   //   other: {
-    //    'official-artwork': {
-    //     front_default: pendingImage,
-     //   },
-     // },
+//  const photo = {
+ //  name: photoName,
+ //  sprites: {
+  //    other: {
+   //     'official-artwork': {
+     //    front_default: pendingImage,
+    //    },
+    // },
    //},
    // stats: [],
   //};

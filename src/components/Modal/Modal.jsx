@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css'
@@ -5,9 +6,15 @@ import css from './Modal.module.css'
  const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
- 
+  static propTypes = {
+    title: PropTypes.string,
+    onClose: PropTypes.func.isRequired,
+    currentImageUrl: PropTypes.string,
+    currentImageDescription: PropTypes.string.isRequired,
+  };
+
   componentDidMount() {
-   console.log("Modal componentDidMount");
+   //console.log("Modal componentDidMount");
   
    window.addEventListener('keydown', this.handleKeyDown);
   }
