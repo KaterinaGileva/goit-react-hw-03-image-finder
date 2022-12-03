@@ -7,6 +7,7 @@ import {fetchImages} from '../../services/api.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from 'components/Modal/Modal.jsx';
+import { Loader } from 'components/Loader/Loader.jsx';
 
 
 export class App extends Component {
@@ -80,7 +81,7 @@ export class App extends Component {
       images,
      // imagesOnPage,
       //totalImages,
-     // isLoading,
+      isLoading,
       showModal,
       currentImageUrl,
       currentImageDescription,
@@ -96,6 +97,7 @@ export class App extends Component {
         <Searchbar onSubmit={getSearchRequest} />
 
         {images && <ImageGallery images={images} openModal={openModal} />}
+        {isLoading && <Loader />}
         {showModal && (
           <Modal
             onClose={toggleModal}
