@@ -27,7 +27,8 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmitForm} style={styles.form}>
+      <header className={css.header}>
+      <form className={css.form} onSubmit={this.onSubmitForm} style={styles.form}>
         <button type="submit"
                 className={css.button}
                 >
@@ -47,6 +48,7 @@ export class Searchbar extends Component {
 
         
       </form>
+      </header>
     );
   }
 }

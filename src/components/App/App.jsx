@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import {fetchImages} from './services/api.jsx';
+import {fetchImages} from '../../services/api.jsx';
 
 
 import { ToastContainer } from 'react-toastify';
