@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from 'components/Modal/Modal.jsx';
 import { Loader } from 'components/Loader/Loader.jsx';
+import { Button } from 'components/Button/Button.jsx';
 
 
 export class App extends Component {
@@ -79,8 +80,8 @@ export class App extends Component {
   render() {
     const {
       images,
-     // imagesOnPage,
-      //totalImages,
+      imagesOnPage,
+      totalImages,
       isLoading,
       showModal,
       currentImageUrl,
@@ -88,7 +89,7 @@ export class App extends Component {
     } = this.state;
 
     const getSearchRequest = this.getSearchRequest;
-   // const onNextFetch = this.onNextFetch;
+    const onNextFetch = this.onNextFetch;
     const openModal = this.openModal;
     const toggleModal = this.toggleModal;
 
@@ -98,6 +99,9 @@ export class App extends Component {
 
         {images && <ImageGallery images={images} openModal={openModal} />}
         {isLoading && <Loader />}
+        {imagesOnPage >= 12 && imagesOnPage < totalImages && (
+          <Button onNextFetch={onNextFetch} />
+        )}
         {showModal && (
           <Modal
             onClose={toggleModal}
@@ -105,18 +109,11 @@ export class App extends Component {
             currentImageDescription={currentImageDescription}
           />
         )}
-        
-
         <ToastContainer />
       </>
     );
   }
 }
 
-/*{isLoading && <Loader />}
 
-        {imagesOnPage >= 12 && imagesOnPage < totalImages && (
-          <Button onNextFetch={onNextFetch} />
-        )}
-
-       */
+      
