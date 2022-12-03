@@ -6,6 +6,7 @@ import {fetchImages} from './services/api.jsx';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Modal } from 'components/Modal/Modal.jsx';
 
 
 export class App extends Component {
@@ -59,11 +60,11 @@ export class App extends Component {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
- /* toggleModal = () => {
+  toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
-  };*/
+  };
 
- /* openModal = e => {
+  openModal = e => {
     const currentImageUrl = e.target.dataset.large;
     const currentImageDescription = e.target.alt;
 
@@ -72,7 +73,7 @@ export class App extends Component {
         currentImageUrl: currentImageUrl,
         currentImageDescription: currentImageDescription,
       }));
-  };*/
+  };
 
   render() {
     const {
@@ -80,22 +81,28 @@ export class App extends Component {
      // imagesOnPage,
       //totalImages,
      // isLoading,
-     // showModal,
-     // currentImageUrl,
-     // currentImageDescription,
+      showModal,
+      currentImageUrl,
+      currentImageDescription,
     } = this.state;
 
     const getSearchRequest = this.getSearchRequest;
    // const onNextFetch = this.onNextFetch;
-  //  const openModal = this.openModal;
-   // const toggleModal = this.toggleModal;
+    const openModal = this.openModal;
+    const toggleModal = this.toggleModal;
 
     return (
       <>
         <Searchbar onSubmit={getSearchRequest} />
 
-        {images && <ImageGallery images={images} /*openModal={openModal}*/ />}
-
+        {images && <ImageGallery images={images} openModal={openModal} />}
+        {showModal && (
+          <Modal
+            onClose={toggleModal}
+            currentImageUrl={currentImageUrl}
+            currentImageDescription={currentImageDescription}
+          />
+        )}
         
 
         <ToastContainer />
@@ -110,10 +117,4 @@ export class App extends Component {
           <Button onNextFetch={onNextFetch} />
         )}
 
-        {showModal && (
-          <Modal
-            onClose={toggleModal}
-            currentImageUrl={currentImageUrl}
-            currentImageDescription={currentImageDescription}
-          />
-        )}*/
+       */
