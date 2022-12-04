@@ -30,10 +30,10 @@ export class Searchbar extends Component {
       <header className={css.header}>
       <form className={css.form} onSubmit={this.onSubmitForm} style={styles.form}>
         <button type="submit"
-                className={css.button}
-                >
+                className={css.button}>
+
           <ImSearch style={{ marginRight: 8 }} />
-          
+
         </button>
         
          <input
@@ -45,8 +45,6 @@ export class Searchbar extends Component {
             value={this.state.searchQuery}
             onChange={this.onChangeInput}
           />
-
-        
       </form>
       </header>
     );

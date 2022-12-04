@@ -2,8 +2,6 @@ import { Component } from 'react';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import {fetchImages} from '../../services/api.jsx';
-
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from 'components/Modal/Modal.jsx';
@@ -98,10 +96,13 @@ export class App extends Component {
         <Searchbar onSubmit={getSearchRequest} />
 
         {images && <ImageGallery images={images} openModal={openModal} />}
+        
         {isLoading && <Loader />}
+        
         {imagesOnPage >= 12 && imagesOnPage < totalImages && (
           <Button onNextFetch={onNextFetch} />
         )}
+        
         {showModal && (
           <Modal
             onClose={toggleModal}
