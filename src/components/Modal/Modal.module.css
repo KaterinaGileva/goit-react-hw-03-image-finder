@@ -37,7 +37,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: right;
 
   padding: 5px;
 }
@@ -64,6 +64,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  
 
   width: 30px;
   height: 20px;
@@ -92,6 +93,7 @@
 }
 
 .icon {
+  
   width: 10px;
   height: 10px;
 }

@@ -14,7 +14,8 @@
   
   .item:hover,
   .item:focus {
-    transform: scale(1.02);
+    transform: scale(1.03);
+    cursor: zoom-in;
   }
   
   /*.item:last-child {
