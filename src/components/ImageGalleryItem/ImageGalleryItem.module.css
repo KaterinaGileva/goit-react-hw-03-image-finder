@@ -1,11 +1,11 @@
 .item {
-    width: 280px;
+    width: 260px;
     
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     
-    gap: 15px;
+    gap: 10px;
     overflow: hidden;
     cursor: pointer;
     transform: scale(1);
