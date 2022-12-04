@@ -1,13 +1,12 @@
 import { Component } from 'react';
+import {fetchImages} from '../../services/api.jsx';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import {fetchImages} from '../../services/api.jsx';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from 'components/Modal/Modal.jsx';
 import { Loader } from 'components/Loader/Loader.jsx';
 import { Button } from 'components/Button/Button.jsx';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export class App extends Component {
   state = {
